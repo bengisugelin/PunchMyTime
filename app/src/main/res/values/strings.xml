@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">PunchMyTime BG.V.0.1</string>
+    <string name="punchMyTime">Punch My Time</string>
+    <string name="usernameInputLoginPageHint">Username</string>
+    <string name="passwordLoginPageHint">Password</string>
+    <string name="hideshowpassword">show/hide</string>
+    <string name="forgorpasswordTextLogin">Forgot password</string>
+    <string name="newuserText">New user</string>
+    <string name="loginBtnText">LOGIN</string>
+    <string name="registrationTitle">"REGISTER "</string>
+    <string name="registerUsername">Username</string>
+    <string name="usernameRegistrationPage">Username</string>
+    <string name="registerBtn">REGISTER</string>
+    <string name="titleforgotPassword">Forgot Your Password, Eh?</string>
+    <string name="titleforgotpassword2">NO WORRIES!</string>
+    <string name="forgorpwparagraph">We will send an email to reset your password after getting your username and email.</string>
+    <string name="forgotPAsswordResetButtonTxt">RESET</string>
+</resources>
