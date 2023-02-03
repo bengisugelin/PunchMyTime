@@ -41,6 +41,13 @@ public class MainActivity extends AppCompatActivity {
             startActivity(goToForgotPasswordActivity);
         });
 
+        LoginButton.setOnClickListener((View view) -> {
+            Intent LogIntoTheApplication = new Intent(MainActivity.this, HomePageActivity.class);
+            startActivity(LogIntoTheApplication);
+
+        });
+
+
 
     }
 }
