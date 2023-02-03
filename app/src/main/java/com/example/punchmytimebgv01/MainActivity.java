@@ -14,6 +14,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     //made another change from PC
+    //Testing by Ozzy using github - adding this comment
 
     Button LoginButton;
     TextView newUserText;
