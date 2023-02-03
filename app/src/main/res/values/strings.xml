@@ -25,4 +25,14 @@
     <string name="btnAddNewHour">Submit</string>
     <string name="txtTimeFrom">From</string>
     <string name="txtTimeTo">To</string>
+    <string name="editTextNewCompName">Company Name</string>
+    <string name="editTextNewRoleName">Role</string>
+    <string name="editTextNewRateName">Hourly Rate</string>
+    <string name="textViewNeCoPaLocation">Location</string>
+    <string name="btnNeCoRoRaAdd">Add</string>
+
+
+
+
+
 </resources>
