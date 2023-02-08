@@ -16,11 +16,11 @@
     <string name="forgorpwparagraph">We will send an email to reset your password after getting your username and email.</string>
     <string name="forgotPAsswordResetButtonTxt">RESET</string>
     <string name="txtGreetings">Hello, UserName!</string>
-    <string name="btnaddNew">Add New</string>
-    <string name="btnEdit">Edit</string>
+    <string name="btnaddNew">Add New Shift</string>
+    <string name="btnEdit">Edit Shift</string>
     <string name="txtSchedule">Your Work Schedule</string>
     <string name="companyNameNewHours">Company</string>
-    <string name="txtNewEmployer">New Employer</string>
+    <string name="txtNewEmployer">New Company/Role/Rate</string>
     <string name="txtWorkingHours">Please enter the hours you\'ll work :</string>
     <string name="btnAddNewHour">Submit</string>
     <string name="txtTimeFrom">From</string>
