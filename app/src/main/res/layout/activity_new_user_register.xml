@@ -19,10 +19,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/textUsernameRegisterPAge"
-        android:layout_width="wrap_content"
+        android:id="@+id/textUsernameRegisterPage"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="28dp"
+        android:layout_marginEnd="24dp"
         android:ems="10"
         android:hint="Username"
         android:inputType="textPersonName"
@@ -33,22 +35,26 @@
 
     <EditText
         android:id="@+id/textPasswordRegisterPage"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textUsernameRegisterPAge" />
+        app:layout_constraintTop_toBottomOf="@+id/textUsernameRegisterPage" />
 
     <EditText
         android:id="@+id/textemailRegisterPAge"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
         android:ems="10"
         android:hint="e-mail"
         android:inputType="textPersonName"
@@ -60,9 +66,11 @@
 
     <EditText
         android:id="@+id/TextUserNameRegisterPage"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
         android:ems="10"
         android:hint="Name"
         android:inputType="textPersonName"
@@ -74,9 +82,11 @@
 
     <EditText
         android:id="@+id/textUserSurnameRegisterPage"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
         android:ems="10"
         android:hint="Surname"
         android:inputType="textPersonName"
@@ -88,9 +98,11 @@
 
     <EditText
         android:id="@+id/phoneRegisterPage"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
         android:ems="10"
         android:hint="Phone number (optional)"
         android:inputType="phone"
@@ -101,8 +113,8 @@
 
     <Button
         android:id="@+id/btnRegisterButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="173dp"
+        android:layout_height="54dp"
         android:layout_marginTop="24dp"
         android:text="@string/registerBtn"
         app:layout_constraintEnd_toEndOf="parent"
