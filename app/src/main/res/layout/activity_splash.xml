@@ -10,6 +10,7 @@
         android:id="@+id/splashGif"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="#EDDF98"
         android:src="@drawable/punch"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
