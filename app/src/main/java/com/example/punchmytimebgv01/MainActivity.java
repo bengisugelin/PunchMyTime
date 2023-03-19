@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -82,23 +83,34 @@ public class MainActivity extends AppCompatActivity {
 
                     Intent LogIntoTheApplication = new Intent(MainActivity.this, HomePageActivity.class);
 
+                    //Check if the databaase has the username that user entered to the login input area
                     for (int i = 0; i<user.size(); i++){
                         if(user.get(i).getUsername().toString().equals(username)){
                             nameFromDB = user.get(i).getUsername().toString();
                             passwordFromDB = user.get(i).getPassword().toString().trim();
                         }
-                    }
+                    }//end of for loop
 
 
+                    //check if the passwords are matching, if yes, log in, if not, throw a message
                     if (username.equals("") || password.equals("")) {
                         Toast.makeText(this, "Please enter you username and password", Toast.LENGTH_SHORT).show();
                     } else {
                         if (nameFromDB.equals(username) && passwordFromDB.equals(password.trim())) {
+
+                            //to export the username to the home page
+                            Bundle bundle = new Bundle();
+                            bundle.putString("USERNAME", usernameTxt.getText().toString());
+                            LogIntoTheApplication.putExtras(bundle);
+
                             startActivity(LogIntoTheApplication);
                         }else{
                             Toast.makeText(this, "wrong username/password", Toast.LENGTH_SHORT).show();
                         }
-                    }
+                    }//end of if else
+
+
+
         });
 
 
