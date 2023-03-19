@@ -40,7 +40,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        String query = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME +
+        String CREATE_USER_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME +
                         " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         USERNAME + " VARCHAR, " +
                         EMAIL + " VARCHAR, " +
@@ -48,7 +48,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         NAME + " VARCHAR, " +
                         SURNAME + " VARCHAR, " +
                         PHONE_NUMBER + " VARCHAR);" ;
-        db.execSQL(query);
+        db.execSQL(CREATE_USER_TABLE);
     }
 
     @Override
@@ -58,25 +58,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    void addUser(String username, String email, String password,
-                 String firstname, String lastName,
-                 String phoneNumber){
+
+    void addUser(UserModel userModel){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
-        cv.put(USERNAME, username);
-        cv.put(EMAIL, email);
-        cv.put(PASSWORD, password);
-        cv.put(NAME, firstname);
-        cv.put(SURNAME, lastName);
-        cv.put(PHONE_NUMBER, phoneNumber);
+        cv.put(USERNAME, userModel.getUsername());
+        cv.put(EMAIL, userModel.getEmail());
+        cv.put(PASSWORD, userModel.getPassword());
+        cv.put(NAME, userModel.getName());
+        cv.put(SURNAME, userModel.getSurname());
+        cv.put(PHONE_NUMBER, userModel.getPhoneNumber());
 
         long result = db.insert(TABLE_NAME,null, cv);
-        
+
         if(result == -1){
             Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
         }else{
             Toast.makeText(context, "User added succesfully", Toast.LENGTH_SHORT).show();
         }
-    }
+    }//end of adduser
+
 }

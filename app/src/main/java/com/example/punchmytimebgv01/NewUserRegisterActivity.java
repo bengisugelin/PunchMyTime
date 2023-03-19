@@ -39,31 +39,23 @@ public class NewUserRegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                //databahelper class
-                DatabaseHelper punchMyTimeDB = new DatabaseHelper(NewUserRegisterActivity.this);
-                //addUser method to add new user when register button clicked
-                punchMyTimeDB.addUser(username_input.getText().toString().trim(),
+                UserModel userModel = new UserModel(username_input.getText().toString().trim(),
                         email_input.getText().toString().trim(),
                         password_input.getText().toString().trim(),
                         name_input.getText().toString().trim(),
                         surname_input.getText().toString().trim(),
                         phonenumber_input.getText().toString().trim());
 
+                //databahelper class
+                DatabaseHelper punchMyTimeDB = new DatabaseHelper(NewUserRegisterActivity.this);
+                //addUser method to add new user when register button clicked
+                punchMyTimeDB.addUser(userModel);
+
 
 
 
                 Intent goToHomePage = new Intent(NewUserRegisterActivity.this, MainActivity.class);
                 startActivity(goToHomePage);
-
-
-
-
-
-
-
-
-
-
 
             }
         });
