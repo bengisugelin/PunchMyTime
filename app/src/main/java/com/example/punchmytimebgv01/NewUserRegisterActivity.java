@@ -46,10 +46,14 @@ public class NewUserRegisterActivity extends AppCompatActivity {
                         surname_input.getText().toString().trim(),
                         phonenumber_input.getText().toString().trim());
 
+                Toast.makeText(NewUserRegisterActivity.this, userModel.toString(), Toast.LENGTH_SHORT).show();
+
                 //databahelper class
                 DatabaseHelper punchMyTimeDB = new DatabaseHelper(NewUserRegisterActivity.this);
                 //addUser method to add new user when register button clicked
-                punchMyTimeDB.addUser(userModel);
+                boolean success = punchMyTimeDB.addUser(userModel);
+
+                Toast.makeText(NewUserRegisterActivity.this, "Success= " + success, Toast.LENGTH_SHORT).show();
 
 
 

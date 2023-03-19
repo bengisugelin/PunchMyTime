@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.util.List;
+
 
 //this is the first version of punchMyTime login page
 public class MainActivity extends AppCompatActivity {
@@ -65,28 +67,42 @@ public class MainActivity extends AppCompatActivity {
         // Assigned input values to string variable
         // --Missing-- Send username and password to DB and check correctness
         LoginButton.setOnClickListener((View view) -> {
-            Intent LogIntoTheApplication = new Intent(MainActivity.this, HomePageActivity.class);
+
+                    String username = usernameTxt.getText().toString();
+                    String password = passwordTxt.getText().toString();
+
+                    String nameFromDB="";
+                    String passwordFromDB="";
 
 
-            try {
+                    DatabaseHelper databaseHelper = new DatabaseHelper(MainActivity.this);
+                    List<UserModel> user = databaseHelper.checkUserLoginCredientials(username);
 
-                username = usernameTxt.getText().toString();
-                password = passwordTxt.getText().toString();
+                    //Toast.makeText(this, user.toString(), Toast.LENGTH_SHORT).show();
 
-                if(username.equals("priya") & password.equals("priya")){
-                    startActivity(LogIntoTheApplication);
-                } else {
-                    Toast.makeText(this, "Wrong Username and Password", Toast.LENGTH_SHORT).show();
-                }
+                    Intent LogIntoTheApplication = new Intent(MainActivity.this, HomePageActivity.class);
 
-            }catch (Exception e) {
-                e.printStackTrace();
-                Toast.makeText(this, "Smth Wrong", Toast.LENGTH_SHORT).show();
-            }
+                    for (int i = 0; i<user.size(); i++){
+                        if(user.get(i).getUsername().toString().equals(username)){
+                            nameFromDB = user.get(i).getUsername().toString();
+                            passwordFromDB = user.get(i).getPassword().toString().trim();
+                        }
+                    }
 
+
+                    if (username.equals("") || password.equals("")) {
+                        Toast.makeText(this, "Please enter you username and password", Toast.LENGTH_SHORT).show();
+                    } else {
+                        if (nameFromDB.equals(username) && passwordFromDB.equals(password.trim())) {
+                            startActivity(LogIntoTheApplication);
+                        }else{
+                            Toast.makeText(this, "wrong username/password", Toast.LENGTH_SHORT).show();
+                        }
+                    }
         });
 
 
 
     }
 }
+
