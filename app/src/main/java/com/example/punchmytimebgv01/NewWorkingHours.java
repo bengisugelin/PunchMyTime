@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 public class NewWorkingHours extends AppCompatActivity {
 
+    //properties of drawer
+
     TextView NewCoRoRaTxt;
     Button SubmitNewHour;
 
@@ -23,24 +25,23 @@ public class NewWorkingHours extends AppCompatActivity {
         SubmitNewHour = findViewById(R.id.btnAddNewHours);
 
         NewCoRoRaTxt.setOnClickListener(new View.OnClickListener() {
-                                            @Override
-                                            public void onClick(View view) {
-                                                Intent goToCoRoRaPage = new Intent(NewWorkingHours.this, NewCompanyRoleRate.class);
-                                                startActivity(goToCoRoRaPage);
-
-                                            }
-                                        });
-
-        SubmitNewHour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent goToHomePage = new Intent(NewWorkingHours.this, HomePageActivity.class);
-                startActivity(goToHomePage);
+                Intent goToCoRoRaPage = new Intent(NewWorkingHours.this, NewCompanyRoleRate.class);
+                startActivity(goToCoRoRaPage);
+
             }
-        }
+        });
+
+        SubmitNewHour.setOnClickListener(new View.OnClickListener() {
+                                             @Override
+                                             public void onClick(View view) {
+                                                 Intent goToHomePage = new Intent(NewWorkingHours.this, HomePageActivity.class);
+                                                 startActivity(goToHomePage);
+                                             }
+                                         }
 
         );
-
 
 
     }
