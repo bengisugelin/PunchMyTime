@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PunchMyTime BG.V.0.1</string>
+    <string name="app_name"> </string>
     <string name="punchMyTime">Punch My Time</string>
     <string name="usernameInputLoginPageHint">Username</string>
     <string name="passwordLoginPageHint">Password</string>
@@ -30,6 +30,14 @@
     <string name="editTextNewRateName">Hourly Rate</string>
     <string name="textViewNeCoPaLocation">Location</string>
     <string name="btnNeCoRoRaAdd">Add</string>
+    <string name="addnewshift">ADDNEWSHIFT</string>
+    <string name="editshift">EDITSHIFT</string>
+    <string name="home">Home</string>
+    <string name="profile"> My Profile</string>
+    <string name="logout">Logout</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="profile_group">Profile</string>
 
 
 </resources>
