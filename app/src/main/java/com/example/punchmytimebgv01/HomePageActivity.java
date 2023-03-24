@@ -75,6 +75,7 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
             startActivity(goToAddNewHours);
 
         });
+
     }
 
     public void onBackpressed(){
@@ -94,11 +95,20 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
             case R.id.home:
                 break;
             case R.id.Logout:
-                Intent intent = new Intent(HomePageActivity.this, MainActivity.class);
-                startActivity(intent);
+                Intent logoutIntent = new Intent(HomePageActivity.this, MainActivity.class);
+                startActivity(logoutIntent);
                 break;
             case R.id.profile:
-                Toast.makeText(this, "Add profile activity", Toast.LENGTH_SHORT).show();
+                Intent ProfileIntent = new Intent(HomePageActivity.this, ProfileInfoActivity.class);
+
+                //to export the username to the home page
+                Bundle bundle = getIntent().getExtras();
+                String username = bundle.getString("USERNAME", "mate");
+                Bundle usernameBundle = new Bundle();
+                bundle.putString("USERNAME", username);
+                ProfileIntent.putExtras(bundle);
+
+                startActivity(ProfileIntent);
 
         }
         return true;

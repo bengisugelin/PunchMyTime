@@ -5,8 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.database.sqlite.SQLiteStatement;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -87,7 +85,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }//end of adduser
 
 
-    public List<UserModel> checkUserLoginCredientials(String username){
+    public List<UserModel> getAllData(String username){
 
         List<UserModel> retunList = new ArrayList<>();
 
@@ -124,6 +122,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return retunList;
 
-    }
+    }//end of checkUserLogin
+
 
 }

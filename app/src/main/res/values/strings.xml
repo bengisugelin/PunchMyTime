@@ -38,6 +38,13 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="profile_group">Profile</string>
+    <string name="txtProfileTitle">Profile Information</string>
+    <string name="txtusername">Username:</string>
+    <string name="txtProfileFirstName">First Name:</string>
+    <string name="txtProfileLastName">Last Name:</string>
+    <string name="txtProfileEmail">Email:</string>
+    <string name="txtProfilePassword">Password:</string>
+    <string name="txtProfilePhoneNumber">Phone Number:</string>
 
 
 </resources>

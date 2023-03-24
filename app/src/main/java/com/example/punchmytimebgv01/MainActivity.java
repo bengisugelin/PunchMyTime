@@ -3,15 +3,13 @@ package com.example.punchmytimebgv01;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -27,9 +25,8 @@ public class MainActivity extends AppCompatActivity {
     EditText usernameTxt;
     EditText passwordTxt;
 
-    //Defining Variables
-    String username;
-    String password;
+    SharedPreferences sharedPreferences;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                     DatabaseHelper databaseHelper = new DatabaseHelper(MainActivity.this);
-                    List<UserModel> user = databaseHelper.checkUserLoginCredientials(username);
+                    List<UserModel> user = databaseHelper.getAllData(username);
 
                     //Toast.makeText(this, user.toString(), Toast.LENGTH_SHORT).show();
 
@@ -108,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(this, "wrong username/password", Toast.LENGTH_SHORT).show();
                         }
                     }//end of if else
+
 
 
 
