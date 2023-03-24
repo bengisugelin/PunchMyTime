@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
@@ -82,11 +83,24 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         }else{
             super.onBackPressed();
         }
-    }
+    }//end of onBackPressed
+
+
 
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.home:
+                break;
+            case R.id.Logout:
+                Intent intent = new Intent(HomePageActivity.this, MainActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.profile:
+                Toast.makeText(this, "Add profile activity", Toast.LENGTH_SHORT).show();
+
+        }
         return true;
     }
 }
