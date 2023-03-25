@@ -28,6 +28,13 @@ public class NewWorkingHours extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent goToCoRoRaPage = new Intent(NewWorkingHours.this, NewCompanyRoleRate.class);
+
+                //to export the username to the new hours page
+                Bundle bundle = getIntent().getExtras();
+                String username = bundle.getString("USERNAME", "mate");
+                bundle.putString("USERNAME", username);
+                goToCoRoRaPage.putExtras(bundle);
+
                 startActivity(goToCoRoRaPage);
 
             }

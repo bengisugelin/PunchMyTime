@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -11,6 +13,7 @@ import java.util.List;
 
 public class ProfileInfoActivity extends AppCompatActivity {
 
+    //Defining elements
     TextView username;
     @SuppressLint("MissingInflatedId")
     EditText email;
@@ -18,23 +21,29 @@ public class ProfileInfoActivity extends AppCompatActivity {
     EditText firstname;
     EditText lastname;
     EditText phonenumber;
+
+    Button btnUpdateProfileInfo;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_info);
 
+        //Assigning Layouts
         username=findViewById(R.id.txtProfileUsername);
         email = findViewById(R.id.editTextProfileEmail);
         password=findViewById(R.id.editTextProfilePassword);
         firstname=findViewById(R.id.editTextProfilefisrtname);
         lastname=findViewById(R.id.editTextProfilelastName);
         phonenumber=findViewById(R.id.editTextProfilephone);
+        btnUpdateProfileInfo=findViewById(R.id.btnUpdateProfileInfo);
 
 
+        //Creating bundle to get the username info from main page.
         Bundle bundle = getIntent().getExtras();
         String usernamePassed = bundle.getString("USERNAME", "mate");
 
+        //calling the db
         DatabaseHelper databaseHelper = new DatabaseHelper(ProfileInfoActivity.this);
         List<UserModel> user = databaseHelper.getAllData(usernamePassed);
 
@@ -59,6 +68,7 @@ public class ProfileInfoActivity extends AppCompatActivity {
             }
         }//end of for loop
 
+        //setting layout texts
         username.setText(usernameFromDB);
         email.setText(emailFromDB);
         password.setText(passwordFromDB);
@@ -66,6 +76,13 @@ public class ProfileInfoActivity extends AppCompatActivity {
         lastname.setText(lastnameFromDB);
         phonenumber.setText(phoneFromDB);
 
+        btnUpdateProfileInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+            }
+        });
 
     }
 }

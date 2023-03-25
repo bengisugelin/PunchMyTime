@@ -18,7 +18,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "PunchMyTime.db";
     private static final int DATABASE_VERSION = 1;
 
-    private static final String TABLE_NAME = "my_punchtime";
+    private static final String USER_TABLE_NAME = "my_punchtime_user";
 
     private static final String ID = "id";
     private static final String EMAIL = "email";
@@ -26,9 +26,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String PASSWORD = "password";
     private static final String NAME = "name";
     private static final String SURNAME = "surname";
+    private static final String PHONE_NUMBER = "phone_number";
+
+
+    private static final String COMPANY_TABLE_NAME = "my_punchtime_company";
     private static final String COMPANY_NAME = "company_name";
     private static final String ROLE = "role";
-    private static final String PHONE_NUMBER = "phone_number";
     private static final String HOURLY_RATE = "hourly_rate";
     private static final String HOURS = "hours";
 
@@ -43,7 +46,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        String CREATE_USER_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME +
+        String CREATE_USER_TABLE = "CREATE TABLE IF NOT EXISTS " + USER_TABLE_NAME +
                         " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         USERNAME + " VARCHAR, " +
                         EMAIL + " VARCHAR, " +
@@ -52,12 +55,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         SURNAME + " VARCHAR, " +
                         PHONE_NUMBER + " VARCHAR);" ;
         db.execSQL(CREATE_USER_TABLE);
+
+
+        String CREATE_COMPANY_TABLE = "CREATE TABLE IF NOT EXISTS " + COMPANY_TABLE_NAME +
+                " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                USERNAME + " VARCHAR, " +
+                COMPANY_NAME + " VARCHAR, " +
+                ROLE + " VARCHAR, " +
+                HOURLY_RATE + " VARCHAR);" ;
+        db.execSQL(CREATE_COMPANY_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
 
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + USER_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + COMPANY_TABLE_NAME);
         onCreate(db);
     }
 
@@ -73,7 +86,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cv.put(SURNAME, userModel.getSurname());
         cv.put(PHONE_NUMBER, userModel.getPhoneNumber());
 
-        long result = db.insert(TABLE_NAME,null, cv);
+        long result = db.insert(USER_TABLE_NAME,null, cv);
 
         if(result == -1){
             Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
@@ -84,13 +97,32 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }//end of adduser
 
+    public boolean addCompany(CompanyModel companyModel){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(USERNAME, companyModel.getUsername());
+        cv.put(COMPANY_NAME, companyModel.getCompanyName());
+        cv.put(ROLE, companyModel.getRole());
+        cv.put(HOURLY_RATE, companyModel.getHourlyRate());
+
+        long result = db.insert(COMPANY_TABLE_NAME, null, cv);
+
+        if(result == -1){
+            Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
+            return false;
+        }else{
+            Toast.makeText(context, "Company added succesfully", Toast.LENGTH_SHORT).show();
+            return  true;
+        }
+    }//end of add company
+
 
     public List<UserModel> getAllData(String username){
 
         List<UserModel> retunList = new ArrayList<>();
 
         //get data from the database
-        String query = "SELECT * FROM " + TABLE_NAME + " WHERE username = ?" ;
+        String query = "SELECT * FROM " + USER_TABLE_NAME + " WHERE username = ?" ;
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor =  db.rawQuery(query,new String[] {username});

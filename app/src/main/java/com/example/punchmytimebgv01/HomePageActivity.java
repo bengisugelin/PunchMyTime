@@ -66,11 +66,19 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         }
 
 
+        //codes for adding new hours page
         addnewHours  = findViewById(R.id.addNewShift);
 
         addnewHours.setOnClickListener((View view)  ->{
 
             Intent goToAddNewHours = new Intent(HomePageActivity.this,NewWorkingHours.class);
+
+
+            //to export the username to the new hours page
+            Bundle bundle = getIntent().getExtras();
+            String username = bundle.getString("USERNAME", "mate");
+            bundle.putString("USERNAME", username);
+            goToAddNewHours.putExtras(bundle);
 
             startActivity(goToAddNewHours);
 
@@ -101,7 +109,7 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
             case R.id.profile:
                 Intent ProfileIntent = new Intent(HomePageActivity.this, ProfileInfoActivity.class);
 
-                //to export the username to the home page
+                //to export the username to the profile page
                 Bundle bundle = getIntent().getExtras();
                 String username = bundle.getString("USERNAME", "mate");
                 Bundle usernameBundle = new Bundle();

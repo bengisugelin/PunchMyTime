@@ -45,6 +45,7 @@
     <string name="txtProfileEmail">Email:</string>
     <string name="txtProfilePassword">Password:</string>
     <string name="txtProfilePhoneNumber">Phone Number:</string>
+    <string name="btnUpdateProfile">Update Profile</string>
 
 
 </resources>
