@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
     EditText usernameTxt;
     EditText passwordTxt;
 
-    SharedPreferences sharedPreferences;
 
 
     @Override

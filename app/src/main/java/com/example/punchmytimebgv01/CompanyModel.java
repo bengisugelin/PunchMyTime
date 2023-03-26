@@ -50,11 +50,6 @@ public class CompanyModel {
 
     @Override
     public String toString() {
-        return "CompanyModel{" +
-                "username='" + username + '\'' +
-                ", companyName='" + companyName + '\'' +
-                ", role='" + role + '\'' +
-                ", hourlyRate=" + hourlyRate +
-                '}';
+        return  companyName + " (" + role + ", " + hourlyRate + ")";
     }
 }
