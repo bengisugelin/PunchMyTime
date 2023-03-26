@@ -156,5 +156,38 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }//end of checkUserLogin
 
+    List<CompanyModel> getCompanyData(String username){
+
+        List<CompanyModel> retunList = new ArrayList<>();
+
+        //get data from the database
+        String query = "SELECT * FROM " + COMPANY_TABLE_NAME + " WHERE username = ?" ;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor =  db.rawQuery(query,new String[] {username});
+
+        if(cursor.moveToFirst()){
+            //loop through the cursor (result set) and create new user objects. Put then into the return list.
+            do{
+
+                String userName = cursor.getString(1);
+                String companyName = cursor.getString(2);
+                String role = cursor.getString(3);
+                Double hourlyRate = Double.parseDouble(cursor.getString(4));
+                CompanyModel newCompany = new CompanyModel(userName,companyName,role,hourlyRate);
+                retunList.add(newCompany);
+
+            }while(cursor.moveToNext());
+        }else{
+
+            //failure. do not add anything to the list.
+        }
+        //close both the cursor and db when done
+        cursor.close();
+        db.close();
+
+        return retunList;
+    }//end of getCompanyData
+
 
 }
