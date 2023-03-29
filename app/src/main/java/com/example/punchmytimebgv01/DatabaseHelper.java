@@ -190,4 +190,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }//end of getCompanyData
 
 
+    public void  updateProfileData(String username, String email, String password, String name, String surname, String phoneNumber){
+
+       //calling a method to get writable database
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(EMAIL, email);
+        cv.put(PASSWORD, password);
+        cv.put(NAME, name);
+        cv.put(SURNAME, surname);
+        cv.put(PHONE_NUMBER, phoneNumber);
+        
+        long result = db.update(USER_TABLE_NAME,cv,"username=?", new String[]{username});
+        db.close();
+        if(result==-1){
+            Toast.makeText(context, "Failed to update", Toast.LENGTH_SHORT).show();
+            
+        }else{
+            Toast.makeText(context, "Updated succesfully", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
 }
