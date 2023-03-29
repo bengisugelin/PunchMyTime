@@ -80,6 +80,15 @@ public class ProfileInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                String upd_Username = username.getText().toString();
+                String upd_email = email.getText().toString();
+                String upd_password = password.getText().toString();
+                String upd_firstName = firstname.getText().toString();
+                String upd_lastname = lastname.getText().toString();
+                String upd_phoneNumber = phonenumber.getText().toString();
+
+                databaseHelper.updateProfileData(upd_Username,upd_email,upd_password,upd_firstName,upd_lastname,upd_phoneNumber);
+
 
             }
         });
