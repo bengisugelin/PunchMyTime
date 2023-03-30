@@ -39,11 +39,6 @@ public class MainActivity extends AppCompatActivity {
         usernameTxt = findViewById(R.id.usernameInputLoginPage);
         passwordTxt = findViewById(R.id.passwordInputLoginPage);
 
-
-
-
-
-
         //Clickable Text New User - Once Clicked the app goes to Register Page
         newUserText.setOnClickListener((View view)  ->{
 
@@ -78,7 +73,6 @@ public class MainActivity extends AppCompatActivity {
                     //Toast.makeText(this, user.toString(), Toast.LENGTH_SHORT).show();
 
                     Intent LogIntoTheApplication = new Intent(MainActivity.this, HomePageActivity.class);
-
                     //Check if the databaase has the username that user entered to the login input area
                     for (int i = 0; i<user.size(); i++){
                         if(user.get(i).getUsername().toString().equals(username)){
@@ -86,8 +80,6 @@ public class MainActivity extends AppCompatActivity {
                             passwordFromDB = user.get(i).getPassword().toString().trim();
                         }
                     }//end of for loop
-
-
                     //check if the passwords are matching, if yes, log in, if not, throw a message
                     if (username.equals("") || password.equals("")) {
                         Toast.makeText(this, "Please enter you username and password", Toast.LENGTH_SHORT).show();

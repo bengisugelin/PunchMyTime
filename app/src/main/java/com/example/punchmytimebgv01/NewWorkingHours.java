@@ -88,12 +88,8 @@ public class NewWorkingHours extends AppCompatActivity {
                 goToCoRoRaPage.putExtras(bundle);
 
                 startActivity(goToCoRoRaPage);
-
             }
         });
-
-
-
 
         DatabaseHelper dbHelper = new DatabaseHelper(NewWorkingHours.this);
 
@@ -126,10 +122,7 @@ public class NewWorkingHours extends AppCompatActivity {
                                                  startActivity(goToHomePage);
                                              }
                                          }
-
         );
-
-
     }
 
 
@@ -215,7 +208,8 @@ public class NewWorkingHours extends AppCompatActivity {
                     strDayOfMonth="0"+strDayOfMonth;
                 }
 
-                String date= strDayOfMonth + "/" + strMonth + "/" + year;
+
+                String date= year + "-" + strMonth + "-" + strDayOfMonth;
                 dateofPunch.setText(date );
             }
         },year, month,day);
