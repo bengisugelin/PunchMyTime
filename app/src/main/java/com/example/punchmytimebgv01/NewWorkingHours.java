@@ -25,7 +25,7 @@ public class NewWorkingHours extends AppCompatActivity {
     //properties of drawer
 
     TextView NewCoRoRaTxt;
-    Button SubmitNewHour;
+    Button SubmitNewHour, GoToLogHistory;
 
 
     Spinner spinnerSelectCompany;
@@ -43,6 +43,7 @@ public class NewWorkingHours extends AppCompatActivity {
         NewCoRoRaTxt = findViewById(R.id.txtNewCoRoRa);
         SubmitNewHour = findViewById(R.id.btnAddNewHours);
         spinnerSelectCompany = findViewById(R.id.spnnerEmployerName);
+        GoToLogHistory = findViewById(R.id.btnGoToLogHistory);
 
         //to choose the time for "from" section
         startOfpunch=findViewById(R.id.editTxtTimeNewHours);
@@ -75,7 +76,7 @@ public class NewWorkingHours extends AppCompatActivity {
         });
 
 
-        //to export the username to the new hours page
+        //to import the username to the new hours page
         Bundle bundle = getIntent().getExtras();
         String username = bundle.getString("USERNAME", "mate");
 
@@ -118,7 +119,6 @@ public class NewWorkingHours extends AppCompatActivity {
                 String Role = values[1];
                 double hourlyrate = Double.parseDouble(values[2]);
                 Toast.makeText(NewWorkingHours.this, "You have selected " + SelectedCompanyName + " with the role of " + Role, Toast.LENGTH_SHORT).show();
-                //Toast.makeText(NewWorkingHours.this,""+adapterView.getItemAtPosition(i).toString(),Toast.LENGTH_SHORT).show();
 
             }
             @Override
@@ -127,16 +127,6 @@ public class NewWorkingHours extends AppCompatActivity {
             }
         });
 
-
-
-//        SubmitNewHour.setOnClickListener(new View.OnClickListener() {
-//                                             @Override
-//                                             public void onClick(View view) {
-//                                                 Intent goToHomePage = new Intent(NewWorkingHours.this, HomePageActivity.class);
-//                                                 startActivity(goToHomePage);
-//                                             }
-//                                         }
-//        );
 
         SubmitNewHour.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -174,6 +164,16 @@ public class NewWorkingHours extends AppCompatActivity {
                 Boolean success = punchMyTimeDB.addNewLog(logModel);
 
                 Toast.makeText(NewWorkingHours.this, "Success= " + success, Toast.LENGTH_SHORT).show();
+            }
+        }); // end of submitNewHour
+
+        GoToLogHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent goTotheLogHistory = new Intent(NewWorkingHours.this, PunchLogsActivvity.class);
+                bundle.putString("USERNAME", username);
+                goTotheLogHistory.putExtras(bundle);
+                startActivity(goTotheLogHistory);
             }
         });
     }

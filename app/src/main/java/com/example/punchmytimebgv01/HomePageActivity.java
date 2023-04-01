@@ -99,6 +99,11 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        //to export the username to the profile page
+        Bundle bundle = getIntent().getExtras();
+        String username = bundle.getString("USERNAME", "mate");
+        Bundle usernameBundle = new Bundle();
+        bundle.putString("USERNAME", username);
         switch (item.getItemId()){
             case R.id.home:
                 break;
@@ -109,14 +114,18 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
             case R.id.profile:
                 Intent ProfileIntent = new Intent(HomePageActivity.this, ProfileInfoActivity.class);
 
-                //to export the username to the profile page
-                Bundle bundle = getIntent().getExtras();
-                String username = bundle.getString("USERNAME", "mate");
-                Bundle usernameBundle = new Bundle();
-                bundle.putString("USERNAME", username);
                 ProfileIntent.putExtras(bundle);
 
                 startActivity(ProfileIntent);
+                break;
+
+            case R.id.punchHistory:
+                Intent punchHistoryIntent = new Intent(HomePageActivity.this, PunchLogsActivvity.class);
+
+                punchHistoryIntent.putExtras(bundle);
+
+                startActivity(punchHistoryIntent);
+                break;
 
         }
         return true;

@@ -204,7 +204,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     List<CompanyModel> getCompanyData(String username){
 
-        List<CompanyModel> retunList = new ArrayList<>();
+        List<CompanyModel> returnList = new ArrayList<>();
 
         //get data from the database
         String query = "SELECT * FROM " + COMPANY_TABLE_NAME + " WHERE username = ?" ;
@@ -221,7 +221,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 String role = cursor.getString(3);
                 Double hourlyRate = Double.parseDouble(cursor.getString(4));
                 CompanyModel newCompany = new CompanyModel(userName,companyName,role,hourlyRate);
-                retunList.add(newCompany);
+                returnList.add(newCompany);
 
             }while(cursor.moveToNext());
         }else{
@@ -232,8 +232,83 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
         db.close();
 
-        return retunList;
+        return returnList;
     }//end of getCompanyData
+
+
+    List<LogModel> getLogData(String username){
+        List<LogModel> returnList = new ArrayList<>();
+
+        //get data from database
+        String query = "SELECT * FROM " + LOG_TABLE_NAME + " WHERE username = ?" ;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor =  db.rawQuery(query,new String[] {username});
+
+        if(cursor.moveToFirst()){
+            //loop through the cursor (result set) and create new user objects. Put then into the return list.
+            do{
+
+                String userName = cursor.getString(1);
+                String companyName = cursor.getString(2);
+                Double hourlyRate = Double.parseDouble(cursor.getString(3));
+                String date = cursor.getString(4);
+                String beginningHour = cursor.getString(5);
+                String endingHour = cursor.getString(6);
+                Double hoursWorked = Double.parseDouble(cursor.getString(7));
+
+
+                LogModel logModel = new LogModel(userName,companyName,hourlyRate,date, beginningHour, endingHour,hoursWorked);
+                returnList.add(logModel);
+
+            }while(cursor.moveToNext());
+        }else{
+
+            //failure. do not add anything to the list.
+        }
+        //close both the cursor and db when done
+        cursor.close();
+        db.close();
+
+        return returnList;
+    }//end of getLogData
+
+
+//
+//    List<LogModel> getLogData(String username, String companyname){
+//        List<LogModel> returnList = new ArrayList<>();
+//
+//        //get data from database
+//        String query = "SELECT * FROM " + COMPANY_TABLE_NAME + " WHERE username = ? AND company_name = ?" ;
+//        SQLiteDatabase db = this.getReadableDatabase();
+//        Cursor cursor =  db.rawQuery(query,new String[] {username, companyname});
+//
+//        if(cursor.moveToFirst()){
+//            //loop through the cursor (result set) and create new user objects. Put then into the return list.
+//            do{
+//
+//                String userName = cursor.getString(1);
+//                String companyName = cursor.getString(2);
+//                Double hourlyRate = Double.parseDouble(cursor.getString(3));
+//                String date = cursor.getString(4);
+//                String beginningHour = cursor.getString(5);
+//                String endingHour = cursor.getString(6);
+//                Double hoursWorked = Double.parseDouble(cursor.getString(7));
+//
+//
+//                LogModel logModel = new LogModel(userName,companyName,hourlyRate,date, beginningHour, endingHour,hoursWorked);
+//                returnList.add(logModel);
+//
+//            }while(cursor.moveToNext());
+//        }else{
+//
+//            //failure. do not add anything to the list.
+//        }
+//        //close both the cursor and db when done
+//        cursor.close();
+//        db.close();
+//
+//        return returnList;
+//    }//end of getLogData
 
 
     public void  updateProfileData(String username, String email, String password, String name, String surname, String phoneNumber){
