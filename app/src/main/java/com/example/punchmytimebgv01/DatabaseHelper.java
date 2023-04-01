@@ -33,13 +33,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COMPANY_NAME = "company_name";
     private static final String ROLE = "role";
     private static final String HOURLY_RATE = "hourly_rate";
-    private static final String HOURS = "hours";
 
+
+    private static final String LOG_TABLE_NAME = "my_punchtime_logs";
+
+    private static final String BEGINNING_HOUR = "beginning_hour";
+    private static  final String ENDING_HOUR = "ending_hour";
+    private static  final String HOURS_WORKED = "hours_worked";
+    private static  final String DATE = "date";
+
+
+    //
     public DatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context = context;
-
-
 
     }
 
@@ -64,6 +71,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 ROLE + " VARCHAR, " +
                 HOURLY_RATE + " VARCHAR);" ;
         db.execSQL(CREATE_COMPANY_TABLE);
+
+
+
+        String CREATE_LOG_TABLE = "CREATE TABLE IF NOT EXISTS " + LOG_TABLE_NAME +
+                " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                USERNAME + " VARCHAR, " +
+                COMPANY_NAME + " VARCHAR, " +
+                HOURLY_RATE + " VARCHAR, " +
+                DATE + " VARCHAR, " +
+                BEGINNING_HOUR + " VARCHAR, " +
+                ENDING_HOUR + " VARCHAR, " +
+                HOURS_WORKED + " VARCHAR);" ;
+        db.execSQL(CREATE_LOG_TABLE);
+
     }
 
     @Override
@@ -71,6 +92,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         db.execSQL("DROP TABLE IF EXISTS " + USER_TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + COMPANY_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + LOG_TABLE_NAME);
         onCreate(db);
     }
 
@@ -115,6 +137,30 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return  true;
         }
     }//end of add company
+
+    public boolean addNewLog(LogModel logmodel){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(USERNAME, logmodel.getUsername());
+        cv.put(COMPANY_NAME, logmodel.getCompanyName());
+        cv.put(HOURLY_RATE, logmodel.getHourlyRate());
+        cv.put(DATE,logmodel.getDate());
+        cv.put(BEGINNING_HOUR, logmodel.getBeginning_hour());
+        cv.put(ENDING_HOUR, logmodel.getEnding_hour());
+        cv.put(HOURS_WORKED, logmodel.getHoursWorked());
+
+        long result = db.insert(LOG_TABLE_NAME, null, cv);
+
+        if(result == -1){
+            Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
+            return false;
+        }else{
+            Toast.makeText(context, "hours added succesfully", Toast.LENGTH_SHORT).show();
+            return  true;
+        }
+
+    }
 
 
     public List<UserModel> getAllData(String username){
