@@ -79,6 +79,8 @@ public class NewWorkingHours extends AppCompatActivity {
         //to import the username to the new hours page
         Bundle bundle = getIntent().getExtras();
         String username = bundle.getString("USERNAME", "mate");
+        Toast.makeText(this, username, Toast.LENGTH_SHORT).show();
+        bundle.putString("USERNAME", username);
 
         //get company database info to create
 
@@ -171,7 +173,7 @@ public class NewWorkingHours extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent goTotheLogHistory = new Intent(NewWorkingHours.this, PunchLogsActivvity.class);
-                bundle.putString("USERNAME", username);
+               // bundle.putString("USERNAME", username);
                 goTotheLogHistory.putExtras(bundle);
                 startActivity(goTotheLogHistory);
             }

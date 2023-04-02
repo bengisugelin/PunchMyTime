@@ -74,7 +74,7 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
             Intent goToAddNewHours = new Intent(HomePageActivity.this,NewWorkingHours.class);
 
 
-            //to export the username to the new hours page
+            //to import the username to the new hours page
             Bundle bundle = getIntent().getExtras();
             String username = bundle.getString("USERNAME", "mate");
             bundle.putString("USERNAME", username);
