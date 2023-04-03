@@ -88,7 +88,8 @@ public class MainActivity extends AppCompatActivity {
 
                             //to export the username to the home page
                             Bundle bundle = new Bundle();
-                            bundle.putString("USERNAME", usernameTxt.getText().toString());
+                           // bundle.putString("USERNAME", usernameTxt.getText().toString());
+                            bundle.putString("USERNAME", nameFromDB);
                             LogIntoTheApplication.putExtras(bundle);
 
                             startActivity(LogIntoTheApplication);

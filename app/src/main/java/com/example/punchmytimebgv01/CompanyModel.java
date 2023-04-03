@@ -50,6 +50,6 @@ public class CompanyModel {
 
     @Override
     public String toString() {
-        return  companyName + " (" + role + ", " + hourlyRate + ")";
+        return  companyName + "," + role + ", " + hourlyRate ;
     }
 }

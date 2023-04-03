@@ -25,7 +25,7 @@ public class NewWorkingHours extends AppCompatActivity {
     //properties of drawer
 
     TextView NewCoRoRaTxt;
-    Button SubmitNewHour;
+    Button SubmitNewHour, GoToLogHistory;
 
 
     Spinner spinnerSelectCompany;
@@ -43,6 +43,7 @@ public class NewWorkingHours extends AppCompatActivity {
         NewCoRoRaTxt = findViewById(R.id.txtNewCoRoRa);
         SubmitNewHour = findViewById(R.id.btnAddNewHours);
         spinnerSelectCompany = findViewById(R.id.spnnerEmployerName);
+        GoToLogHistory = findViewById(R.id.btnGoToLogHistory);
 
         //to choose the time for "from" section
         startOfpunch=findViewById(R.id.editTxtTimeNewHours);
@@ -75,9 +76,15 @@ public class NewWorkingHours extends AppCompatActivity {
         });
 
 
-        //to export the username to the new hours page
+        //to import the username to the new hours page
         Bundle bundle = getIntent().getExtras();
         String username = bundle.getString("USERNAME", "mate");
+        Toast.makeText(this, username, Toast.LENGTH_SHORT).show();
+        bundle.putString("USERNAME", username);
+
+        //get company database info to create
+
+
 
         NewCoRoRaTxt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,11 +107,20 @@ public class NewWorkingHours extends AppCompatActivity {
         spinnerSelectCompany.setAdapter(adapter);
 
 
+        String SelectedCompanyName = "";
+        double SelectedHourlyRate=0;
+
+
         spinnerSelectCompany.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-                Toast.makeText(NewWorkingHours.this,""+adapterView.getItemAtPosition(i).toString(),Toast.LENGTH_SHORT).show();
+                String spinnerValue= adapterView.getItemAtPosition(i).toString();
+                String[] values = spinnerValue.split(",");
+                String SelectedCompanyName = values[0];
+                String Role = values[1];
+                double hourlyrate = Double.parseDouble(values[2]);
+                Toast.makeText(NewWorkingHours.this, "You have selected " + SelectedCompanyName + " with the role of " + Role, Toast.LENGTH_SHORT).show();
 
             }
             @Override
@@ -114,15 +130,54 @@ public class NewWorkingHours extends AppCompatActivity {
         });
 
 
-
         SubmitNewHour.setOnClickListener(new View.OnClickListener() {
-                                             @Override
-                                             public void onClick(View view) {
-                                                 Intent goToHomePage = new Intent(NewWorkingHours.this, HomePageActivity.class);
-                                                 startActivity(goToHomePage);
-                                             }
-                                         }
-        );
+            @Override
+            public void onClick(View view) {
+                String spinnerValue = spinnerSelectCompany.getSelectedItem().toString();
+                String[] values = spinnerValue.split(",");
+                String SelectedCompanyName = values[0];
+                double hourlyrate = Double.parseDouble(values[2]);
+
+                //calculate hours worked:
+
+                String[] startvalues = startOfpunch.getText().toString().split(":");
+                double startHour = Double.parseDouble(startvalues[0]);
+                double convertmintohour = Double.parseDouble(startvalues[1])/60;
+                double sumStart = startHour+ convertmintohour;
+
+                String [] endValues = endOfPunch.getText().toString().split((":"));
+                double endHour = Double.parseDouble(endValues[0]);
+                double convertmintohourEnd = Double.parseDouble(endValues[1])/60;
+                double sumend = endHour+convertmintohourEnd;
+
+
+                double hoursWorked = sumend-sumStart;
+
+               LogModel logModel = new LogModel(username,
+                       SelectedCompanyName,
+                       hourlyrate,
+                       dateofPunch.getText().toString(),
+                       startOfpunch.getText().toString(),
+                       endOfPunch.getText().toString(),
+                       hoursWorked );
+
+                //databahelper class
+                DatabaseHelper punchMyTimeDB = new DatabaseHelper(NewWorkingHours.this);
+                Boolean success = punchMyTimeDB.addNewLog(logModel);
+
+                Toast.makeText(NewWorkingHours.this, "Success= " + success, Toast.LENGTH_SHORT).show();
+            }
+        }); // end of submitNewHour
+
+        GoToLogHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent goTotheLogHistory = new Intent(NewWorkingHours.this, PunchLogsActivvity.class);
+               // bundle.putString("USERNAME", username);
+                goTotheLogHistory.putExtras(bundle);
+                startActivity(goTotheLogHistory);
+            }
+        });
     }
 
 
@@ -218,4 +273,6 @@ public class NewWorkingHours extends AppCompatActivity {
         datePickerDialog.show();
 
     }//end of opendatepicker
+
+
 }
