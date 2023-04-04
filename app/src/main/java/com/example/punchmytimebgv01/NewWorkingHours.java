@@ -140,32 +140,40 @@ public class NewWorkingHours extends AppCompatActivity {
 
                 //calculate hours worked:
 
-                String[] startvalues = startOfpunch.getText().toString().split(":");
-                double startHour = Double.parseDouble(startvalues[0]);
-                double convertmintohour = Double.parseDouble(startvalues[1])/60;
-                double sumStart = startHour+ convertmintohour;
+                if(startOfpunch.getText().toString().equals("")||
+                        endOfPunch.getText().toString().equals("") ||
+                        dateofPunch.getText().toString().equals("")){
+                    Toast.makeText(NewWorkingHours.this, "Please enter hours and date", Toast.LENGTH_SHORT).show();
+                }else{
+                    String[] startvalues = startOfpunch.getText().toString().split(":");
+                    double startHour = Double.parseDouble(startvalues[0]);
+                    double convertmintohour = Double.parseDouble(startvalues[1])/60;
+                    double sumStart = startHour+ convertmintohour;
 
-                String [] endValues = endOfPunch.getText().toString().split((":"));
-                double endHour = Double.parseDouble(endValues[0]);
-                double convertmintohourEnd = Double.parseDouble(endValues[1])/60;
-                double sumend = endHour+convertmintohourEnd;
+                    String [] endValues = endOfPunch.getText().toString().split((":"));
+                    double endHour = Double.parseDouble(endValues[0]);
+                    double convertmintohourEnd = Double.parseDouble(endValues[1])/60;
+                    double sumend = endHour+convertmintohourEnd;
 
 
-                double hoursWorked = sumend-sumStart;
+                    double hoursWorked = sumend-sumStart;
 
-               LogModel logModel = new LogModel(username,
-                       SelectedCompanyName,
-                       hourlyrate,
-                       dateofPunch.getText().toString(),
-                       startOfpunch.getText().toString(),
-                       endOfPunch.getText().toString(),
-                       hoursWorked );
+                    LogModel logModel = new LogModel(username,
+                            SelectedCompanyName,
+                            hourlyrate,
+                            dateofPunch.getText().toString(),
+                            startOfpunch.getText().toString(),
+                            endOfPunch.getText().toString(),
+                            hoursWorked );
 
-                //databahelper class
-                DatabaseHelper punchMyTimeDB = new DatabaseHelper(NewWorkingHours.this);
-                Boolean success = punchMyTimeDB.addNewLog(logModel);
+                    //databahelper class
 
-                Toast.makeText(NewWorkingHours.this, "Success= " + success, Toast.LENGTH_SHORT).show();
+                    DatabaseHelper punchMyTimeDB = new DatabaseHelper(NewWorkingHours.this);
+                    Boolean success = punchMyTimeDB.addNewLog(logModel);
+
+                    Toast.makeText(NewWorkingHours.this, "Success= " + success, Toast.LENGTH_SHORT).show();
+                }
+
             }
         }); // end of submitNewHour
 
