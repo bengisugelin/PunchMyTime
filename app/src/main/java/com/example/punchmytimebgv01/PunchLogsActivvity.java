@@ -1,11 +1,13 @@
 package com.example.punchmytimebgv01;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -91,8 +93,31 @@ public class PunchLogsActivvity extends AppCompatActivity {
 
             switch (direction){
                 case ItemTouchHelper.LEFT:
-                    databaseHelper.deleteLog(clickedlogmodel);
-                    customAdapter.notifyItemRemoved(position);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(PunchLogsActivvity.this);
+                    builder.setTitle("Delete the Punch");
+                    builder.setMessage("You are deleting the work punched in" + clickedlogmodel.getDate() + "." );
+                    builder.setIcon(R.drawable.baseline_delete_24);
+
+                    builder.setCancelable(false);
+                    builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                            databaseHelper.deleteLog(clickedlogmodel);
+                            customAdapter.notifyItemRemoved(position);
+                        }
+                    });
+                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            customAdapter = new CustomAdapter(PunchLogsActivvity.this,
+                                    date, time,company_name,hourly_rate,total_work_hours,total_earnings);
+                            recyclerView.setAdapter(customAdapter);
+                        }
+                    });
+                    builder.show();
+
+
 
                     break;
                 case ItemTouchHelper.RIGHT:
