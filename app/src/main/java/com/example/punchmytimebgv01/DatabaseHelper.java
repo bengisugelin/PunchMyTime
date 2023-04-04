@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -160,7 +161,42 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return  true;
         }
 
+    }// end of add new log
+
+    public boolean deleteOneLog(LogModel logModel){
+
+        SQLiteDatabase db = getWritableDatabase();
+        String deleteQuery = "DELETE FROM " + LOG_TABLE_NAME + " WHERE username = ? AND date = ?" ;
+
+        Cursor cursor =  db.rawQuery(deleteQuery,null);
+
+        if(cursor.moveToFirst()){
+            Toast.makeText(context, "punch deleted", Toast.LENGTH_SHORT).show();
+            return true;
+            
+        }else{
+            Toast.makeText(context, "failed", Toast.LENGTH_SHORT).show();
+            return false;
+        }
     }
+
+    public boolean deleteLog(LogModel logModel){
+        SQLiteDatabase db = getWritableDatabase();
+        String usernamechosed = logModel.getUsername();
+        String datechosed = logModel.getDate();
+
+        long result= db.delete(LOG_TABLE_NAME, "username= ? AND date = ?", new String[]{usernamechosed, datechosed} );
+
+        if(result==-1){
+            Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
+            return false;
+        }else{
+            Toast.makeText(context, "Deleted", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+    }
+
+
 
 
     public List<UserModel> getAllData(String username){

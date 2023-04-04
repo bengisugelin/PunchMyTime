@@ -1,6 +1,8 @@
 package com.example.punchmytimebgv01;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -60,11 +62,48 @@ public class PunchLogsActivvity extends AppCompatActivity {
         customAdapter = new CustomAdapter(PunchLogsActivvity.this,
                 date, time,company_name,hourly_rate,total_work_hours,total_earnings);
         recyclerView.setAdapter(customAdapter);
+        customAdapter.notifyDataSetChanged();
         recyclerView.setLayoutManager(new LinearLayoutManager(PunchLogsActivvity.this));
 
 
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
+        itemTouchHelper.attachToRecyclerView(recyclerView);
 
     }
+
+    ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+            return false;
+        }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+
+            int position =viewHolder.getAdapterPosition();
+
+            Bundle bundle = getIntent().getExtras();
+            String username = bundle.getString("USERNAME", "mate");
+            List<LogModel> logModels = databaseHelper.getLogData(username);
+            LogModel clickedlogmodel = logModels.get(position);
+           // Toast.makeText(PunchLogsActivvity.this, clickedlogmodel.getUsername(), Toast.LENGTH_SHORT).show();
+           // Toast.makeText(PunchLogsActivvity.this, clickedlogmodel.getDate(), Toast.LENGTH_SHORT).show();
+
+            switch (direction){
+                case ItemTouchHelper.LEFT:
+                    databaseHelper.deleteLog(clickedlogmodel);
+                    customAdapter.notifyItemRemoved(position);
+
+                    break;
+                case ItemTouchHelper.RIGHT:
+
+                    break;
+
+
+            }
+
+        }
+    };
 
 
 }
