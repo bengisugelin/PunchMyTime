@@ -10,7 +10,7 @@
         android:id="@+id/editTextNewCompName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="150dp"
         android:ems="10"
         android:hint="@string/editTextNewCompName"
         android:inputType="textPersonName"
@@ -45,24 +45,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextNewRole" />
 
-    <TextView
-        android:id="@+id/textViewNeCoPaLocation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:text="@string/textViewNeCoPaLocation"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNewRate" />
-
     <Button
         android:id="@+id/btnNeCoRoRaAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:text="@string/btnNeCoRoRaAdd"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewNeCoPaLocation" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextNewRate" />
 </androidx.constraintlayout.widget.ConstraintLayout>
